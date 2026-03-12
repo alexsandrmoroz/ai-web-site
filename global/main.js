@@ -1,0 +1,207 @@
+/* ============================================================
+   CodeBridge Foundation — Global JavaScript
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  /* ── Firebase Config ──────────────────────────────────── */
+  const firebaseConfig = {
+    apiKey: "AIzaSyCZV7nDI1ej4xQgTwoM9shKweXt0-6pqQs",
+    authDomain: "ai-forms-25ad9.firebaseapp.com",
+    projectId: "ai-forms-25ad9",
+    storageBucket: "ai-forms-25ad9.firebasestorage.app",
+    messagingSenderId: "710083224092",
+    appId: "1:710083224092:web:4c2d2279e5b4dae0ed35d9"
+  };
+  const COLLECTION_NAME = "codebridge-applications";
+
+  /* ── Nav: Scroll Shadow ───────────────────────────────── */
+  function initNavScroll() {
+    const header = document.querySelector('.nav-header');
+    if (!header) return;
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── Nav: Services Dropdown ───────────────────────────── */
+  function initDropdown() {
+    const btn = document.querySelector('.nav-services-btn');
+    const menu = document.querySelector('.nav-dropdown-menu');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', () => {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+
+    menu.addEventListener('click', (e) => e.stopPropagation());
+  }
+
+  /* ── Nav: Mobile Hamburger ────────────────────────────── */
+  function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const servicesToggle = document.querySelector('.mobile-services-toggle');
+    const servicesSub = document.querySelector('.mobile-services-sub');
+
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open', !isOpen);
+      hamburger.classList.toggle('open', !isOpen);
+      hamburger.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(isOpen));
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    if (servicesToggle && servicesSub) {
+      servicesToggle.addEventListener('click', () => {
+        servicesSub.classList.toggle('open');
+      });
+    }
+
+    // Close on outside click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  /* ── Scroll Animations (IntersectionObserver) ─────────── */
+  function initScrollAnimations() {
+    const targets = document.querySelectorAll('.fade-up');
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    targets.forEach(el => observer.observe(el));
+  }
+
+  /* ── Firebase: Contact Form ───────────────────────────── */
+  async function initContactForm() {
+    const form = document.getElementById('guidance-form');
+    if (!form) return;
+
+    try {
+      const { initializeApp } = await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js');
+      const { getFirestore, collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js');
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('.form-submit');
+        const msgEl = form.querySelector('.form-message');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        if (msgEl) { msgEl.className = 'form-message'; msgEl.textContent = ''; }
+
+        const data = {
+          firstName: form.firstName?.value?.trim() || '',
+          lastName:  form.lastName?.value?.trim()  || '',
+          email:     form.email?.value?.trim()      || '',
+          phone:     form.phone?.value?.trim()      || '',
+          idea:      form.idea?.value?.trim()        || '',
+          submittedAt: serverTimestamp()
+        };
+
+        try {
+          await addDoc(collection(db, COLLECTION_NAME), data);
+          if (msgEl) {
+            msgEl.textContent = 'Thank you! We\'ll be in touch soon.';
+            msgEl.className = 'form-message success';
+          }
+          form.reset();
+        } catch (err) {
+          console.error('Form submission error:', err);
+          if (msgEl) {
+            msgEl.textContent = 'Something went wrong. Please try again.';
+            msgEl.className = 'form-message error';
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      });
+    } catch (err) {
+      console.warn('Firebase could not be initialized:', err);
+    }
+  }
+
+  /* ── Counter Animation ────────────────────────────────── */
+  function animateCounter(el, target, duration = 1500) {
+    const start = performance.now();
+    const isDecimal = String(target).includes('.');
+    const update = (time) => {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = eased * target;
+      el.textContent = isDecimal
+        ? value.toFixed(1)
+        : Math.floor(value).toLocaleString();
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.dataset.count);
+          animateCounter(el, target);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(el => observer.observe(el));
+  }
+
+  /* ── Bootstrap ────────────────────────────────────────── */
+  function init() {
+    initNavScroll();
+    initDropdown();
+    initMobileMenu();
+    initScrollAnimations();
+    initContactForm();
+    initCounters();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
