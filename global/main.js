@@ -6,7 +6,11 @@
   'use strict';
 
   /* ── Section Loader ───────────────────────────────────── */
-  const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main';
+  // Auto-detect version from the script tag so @commit / @main both work
+  const _self = document.currentScript ||
+    document.querySelector('script[src*="alexsandrmoroz/ai-web-site"]');
+  const _ver = (_self && _self.src.match(/ai-web-site@([^/]+)/)?.[1]) || 'main';
+  const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@' + _ver;
   const SECTIONS = [
     BASE + '/global/nav.html',
     BASE + '/pages/home/hero.html',
