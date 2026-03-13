@@ -5,6 +5,50 @@
 (function () {
   'use strict';
 
+  /* ── Section Loader ───────────────────────────────────── */
+  const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main';
+  const SECTIONS = [
+    BASE + '/global/nav.html',
+    BASE + '/pages/home/hero.html',
+    BASE + '/pages/home/mission.html',
+    BASE + '/pages/home/services.html',
+    BASE + '/pages/home/industries.html',
+    BASE + '/pages/home/techstack.html',
+    BASE + '/pages/home/team.html',
+    BASE + '/pages/home/volunteer.html',
+    BASE + '/pages/home/blog.html',
+    BASE + '/pages/home/contact.html',
+    BASE + '/pages/home/image.html',
+    BASE + '/global/footer.html',
+  ];
+
+  async function loadSections() {
+    const container = document.getElementById('cb-app') || document.body;
+    for (const url of SECTIONS) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { console.warn('Could not load:', url); continue; }
+        const html = await res.text();
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        container.appendChild(wrapper);
+      } catch (e) {
+        console.warn('Failed to fetch:', url, e);
+      }
+    }
+    init();
+  }
+
+  /* ── CSS Loader ───────────────────────────────────────── */
+  function loadCSS() {
+    if (document.querySelector('link[data-cb-styles]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = BASE + '/global/main.css';
+    link.setAttribute('data-cb-styles', '1');
+    document.head.appendChild(link);
+  }
+
   /* ── Firebase Config ──────────────────────────────────── */
   const firebaseConfig = {
     apiKey: "AIzaSyCZV7nDI1ej4xQgTwoM9shKweXt0-6pqQs",
@@ -70,7 +114,6 @@
       });
     }
 
-    // Close on outside click
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
@@ -199,9 +242,11 @@
     initCounters();
   }
 
+  /* ── Entry Point ──────────────────────────────────────── */
+  loadCSS();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', loadSections);
   } else {
-    init();
+    loadSections();
   }
 })();
