@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Outfit', sans-serif;
   color: var(--text-dark);
-  background: #fff;
+  background: #0f3b2f !important;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
