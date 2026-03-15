@@ -1,0 +1,15 @@
+name: Purge jsDelivr Cache
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge jsDelivr cache
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.css"
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.js"
