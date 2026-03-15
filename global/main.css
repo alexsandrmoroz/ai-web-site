@@ -38,11 +38,11 @@ ul { list-style: none; }
 
 /* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
-h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; }
-h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; }
-h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 600; }
-h4 { font-size: 1rem; font-weight: 600; }
-p  { font-size: 1rem; color: rgba(255,255,255,0.75); }
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff !important; }
+h2 { font-family: 'Montserrat', sans-serif !important; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff !important; }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 600; color: #fff !important; }
+h4 { font-size: 1rem; font-weight: 600; color: #fff !important; }
+p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
 
 /* ── Container ────────────────────────────────────────────── */
 .container {
@@ -107,7 +107,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75); }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.55) !important;
   margin-bottom: 12px;
 }
 .section-label-light { color: rgba(255,255,255,0.6); }
@@ -667,7 +667,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75); }
 .blog-tagline {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
-  color: var(--text-muted);
+  color: rgba(255,255,255,0.55) !important;
   font-style: italic;
 }
 
