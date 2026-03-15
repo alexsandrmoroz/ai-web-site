@@ -39,7 +39,7 @@ ul { list-style: none; }
 /* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
 h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; }
+h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; }
 h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 600; }
 h4 { font-size: 1rem; font-weight: 600; }
 p  { font-size: 1rem; color: var(--text-muted); }
@@ -483,7 +483,7 @@ p  { font-size: 1rem; color: var(--text-muted); }
   text-align: center;
 }
 .techstack-label { color: var(--text-muted); }
-.techstack-title { color: var(--text-dark); margin-bottom: 48px; }
+.techstack-title { margin-bottom: 48px; }
 
 .techstack-grid {
   display: grid;
@@ -526,7 +526,7 @@ p  { font-size: 1rem; color: var(--text-muted); }
   align-items: center;
 }
 .mission-content {}
-.mission-title { color: var(--text-dark); margin-bottom: 24px; }
+.mission-title { margin-bottom: 24px; }
 .mission-body { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; }
 
 .mission-values { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
@@ -642,7 +642,7 @@ p  { font-size: 1rem; color: var(--text-muted); }
   margin: 0 auto;
   padding: 0 24px;
 }
-.volunteer-title { color: var(--text-dark); margin-bottom: 20px; }
+.volunteer-title { margin-bottom: 20px; }
 .volunteer-body { font-size: 1.05rem; line-height: 1.8; margin-bottom: 40px; }
 .volunteer-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
