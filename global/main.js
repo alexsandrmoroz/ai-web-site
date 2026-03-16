@@ -6,11 +6,7 @@
   'use strict';
 
   /* ── Section Loader ───────────────────────────────────── */
-  // Auto-detect version from the script tag so @commit / @main both work
-  const _self = document.currentScript ||
-    document.querySelector('script[src*="alexsandrmoroz/ai-web-site"]');
-  const _ver = (_self && _self.src.match(/ai-web-site@([^/]+)/)?.[1]) || 'main';
-  const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@' + _ver;
+  const BASE = 'https://alexsandrmoroz.github.io/ai-web-site';
   const SECTIONS = [
     BASE + '/global/nav.html',
     BASE + '/pages/home/hero.html',
@@ -238,7 +234,7 @@
 
   /* ── Deploy Badge ─────────────────────────────────────── */
   function initDeployBadge() {
-    const DEPLOY_TIME = new Date('2026-03-16T20:44:00Z');
+    const DEPLOY_TIME = new Date('2026-03-16T20:50:00Z');
     const label = DEPLOY_TIME.toLocaleString('uk-UA', {
       timeZone: 'Europe/Kyiv',
       day:    '2-digit',
