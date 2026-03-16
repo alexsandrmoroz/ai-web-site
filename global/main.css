@@ -753,7 +753,9 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   border-radius: var(--radius-card);
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
-  transition: all var(--transition);
+  transform: translateY(0);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
   text-align: center;
 }
 .team-card:hover {
