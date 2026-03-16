@@ -34,6 +34,14 @@
     .then(html => { document.getElementById('embed-mission').outerHTML = html; });
 </script>
 
+<!-- ── STATS ───────────────────────────────────────────────── -->
+<div id="embed-stats"></div>
+<script>
+  fetch('https://alexsandrmoroz.github.io/ai-web-site/pages/home/stats.html')
+    .then(r => r.text())
+    .then(html => { document.getElementById('embed-stats').outerHTML = html; });
+</script>
+
 <!-- ── IMAGE ──────────────────────────────────────────────── -->
 <div id="embed-image"></div>
 <script>
@@ -72,6 +80,14 @@
   fetch('https://alexsandrmoroz.github.io/ai-web-site/pages/home/industries.html')
     .then(r => r.text())
     .then(html => { document.getElementById('embed-industries').outerHTML = html; });
+</script>
+
+<!-- ── PROCESS ────────────────────────────────────────────── -->
+<div id="embed-process"></div>
+<script>
+  fetch('https://alexsandrmoroz.github.io/ai-web-site/pages/home/process.html')
+    .then(r => r.text())
+    .then(html => { document.getElementById('embed-process').outerHTML = html; });
 </script>
 
 <!-- ── SERVICES ───────────────────────────────────────────── -->

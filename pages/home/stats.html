@@ -1,0 +1,136 @@
+<section class="stats-impact" id="stats">
+  <style>
+    .stats-impact {
+      background: linear-gradient(135deg, #163d35 0%, #1a5c4a 60%, #163d35 100%);
+      padding: 96px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-impact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .stats-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .stats-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #f8f7f4;
+      margin: 0 0 16px;
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.15;
+    }
+    .stats-subtitle {
+      font-size: 1.1rem;
+      color: rgba(248,247,244,0.7);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stats-impact { padding: 64px 20px; }
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 40px 28px;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .stat-number {
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: #2a8a6e;
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f8f7f4;
+      font-family: 'Open Sans', sans-serif;
+      margin-bottom: 8px;
+    }
+    .stat-desc {
+      font-size: 0.875rem;
+      color: rgba(248,247,244,0.55);
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.5;
+    }
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+  </style>
+
+  <div class="stats-inner">
+    <div class="stats-header">
+      <div class="section-label section-label-light fade-up">By The Numbers</div>
+      <h2 class="stats-title fade-up delay-1">Our Impact in Action</h2>
+      <p class="stats-subtitle fade-up delay-2">Every number represents a person whose life changed through access to world-class tech education.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <span class="stat-icon">&#127891;</span>
+        <div class="stat-number">2,400+</div>
+        <div class="stat-label">Graduates</div>
+        <div class="stat-desc">Students who completed our programs and launched tech careers.</div>
+      </div>
+
+      <div class="stat-card fade-up delay-2">
+        <span class="stat-icon">&#128200;</span>
+        <div class="stat-number">87%</div>
+        <div class="stat-label">Job Placement Rate</div>
+        <div class="stat-desc">Of our graduates land a tech role within 6 months of completing the program.</div>
+      </div>
+
+      <div class="stat-card fade-up delay-3">
+        <span class="stat-icon">&#129309;</span>
+        <div class="stat-number">380+</div>
+        <div class="stat-label">Active Mentors</div>
+        <div class="stat-desc">Industry professionals volunteering their time and expertise.</div>
+      </div>
+
+      <div class="stat-card fade-up delay-4">
+        <span class="stat-icon">&#127968;</span>
+        <div class="stat-number">120+</div>
+        <div class="stat-label">Partner Companies</div>
+        <div class="stat-desc">Organizations that hire our graduates and sponsor our programs.</div>
+      </div>
+    </div>
+  </div>
+</section>
