@@ -17,7 +17,7 @@
   --shadow-lg:   0 20px 60px rgba(0,0,0,0.18);
   --radius-btn:  24px;
   --radius-card: 12px;
-  --container:   1140px;
+  --container:   1440px;
   --transition:  0.3s ease;
 }
 
@@ -989,6 +989,10 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
 .footer {
   background: var(--green-dark);
   color: rgba(248,247,244,0.8);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
 }
 .footer-container {
   max-width: var(--container);
