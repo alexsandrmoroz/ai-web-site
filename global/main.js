@@ -238,11 +238,15 @@
 
   /* ── Deploy Badge ─────────────────────────────────────── */
   function initDeployBadge() {
-    const DEPLOY_TIME = new Date('2026-03-16T17:34:00');
-    const pad = n => String(n).padStart(2, '0');
-    const label =
-      `${pad(DEPLOY_TIME.getDate())}.${pad(DEPLOY_TIME.getMonth()+1)}.${DEPLOY_TIME.getFullYear()} ` +
-      `${pad(DEPLOY_TIME.getHours())}:${pad(DEPLOY_TIME.getMinutes())}`;
+    const DEPLOY_TIME = new Date('2026-03-16T20:35:00Z');
+    const label = DEPLOY_TIME.toLocaleString('uk-UA', {
+      timeZone: 'Europe/Kyiv',
+      day:    '2-digit',
+      month:  '2-digit',
+      year:   'numeric',
+      hour:   '2-digit',
+      minute: '2-digit',
+    });
 
     const badge = document.createElement('div');
     badge.id = 'cb-deploy-badge';
