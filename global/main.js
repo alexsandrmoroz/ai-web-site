@@ -236,6 +236,34 @@
     counters.forEach(el => observer.observe(el));
   }
 
+  /* ── Deploy Badge ─────────────────────────────────────── */
+  function initDeployBadge() {
+    const DEPLOY_TIME = new Date('2026-03-16T17:34:00');
+    const pad = n => String(n).padStart(2, '0');
+    const label =
+      `${pad(DEPLOY_TIME.getDate())}.${pad(DEPLOY_TIME.getMonth()+1)}.${DEPLOY_TIME.getFullYear()} ` +
+      `${pad(DEPLOY_TIME.getHours())}:${pad(DEPLOY_TIME.getMinutes())}`;
+
+    const badge = document.createElement('div');
+    badge.id = 'cb-deploy-badge';
+    badge.textContent = '🕐 ' + label;
+    badge.style.cssText = [
+      'position:fixed',
+      'bottom:16px',
+      'right:16px',
+      'z-index:99999',
+      'background:rgba(0,0,0,0.75)',
+      'color:#a3e635',
+      'font:600 11px/1 monospace',
+      'padding:6px 10px',
+      'border-radius:6px',
+      'border:1px solid rgba(163,230,53,0.3)',
+      'pointer-events:none',
+      'backdrop-filter:blur(4px)',
+    ].join(';');
+    document.body.appendChild(badge);
+  }
+
   /* ── Bootstrap ────────────────────────────────────────── */
   function init() {
     initNavScroll();
@@ -244,6 +272,7 @@
     initScrollAnimations();
     initContactForm();
     initCounters();
+    initDeployBadge();
   }
 
   /* ── Entry Point ──────────────────────────────────────── */
