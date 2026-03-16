@@ -238,7 +238,7 @@
 
   /* ── Deploy Badge ─────────────────────────────────────── */
   function initDeployBadge() {
-    const DEPLOY_TIME = new Date('2026-03-16T20:35:00Z');
+    const DEPLOY_TIME = new Date('2026-03-16T20:44:00Z');
     const label = DEPLOY_TIME.toLocaleString('uk-UA', {
       timeZone: 'Europe/Kyiv',
       day:    '2-digit',

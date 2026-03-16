@@ -60,7 +60,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   border-radius: var(--radius-btn);
   font-size: 0.95rem;
   font-weight: 600;
-  transition: all var(--transition);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   font-family: 'Open Sans', sans-serif;
 }
 .btn-primary {
@@ -172,7 +172,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   font-weight: 500;
   padding: 8px 14px;
   border-radius: 8px;
-  transition: all var(--transition);
+  transition: color 0.3s ease, background 0.3s ease;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -206,7 +206,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   opacity: 0;
   visibility: hidden;
   transform: translateX(-50%) translateY(-8px);
-  transition: all var(--transition);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
   box-shadow: var(--shadow-lg);
 }
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -223,7 +223,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   padding: 12px 14px;
   border-radius: 8px;
   color: rgba(248,247,244,0.85);
-  transition: all var(--transition);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .nav-dropdown-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .nav-dropdown-icon { color: var(--green-light); font-size: 0.5rem; margin-top: 5px; flex-shrink: 0; }
@@ -243,7 +243,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   height: 2px;
   background: #fff;
   border-radius: 2px;
-  transition: all var(--transition);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -279,7 +279,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   font-weight: 500;
   color: rgba(248,247,244,0.85);
   border-radius: 8px;
-  transition: all var(--transition);
+  transition: background 0.3s ease, color 0.3s ease;
   width: 100%;
   text-align: left;
   display: flex;
@@ -306,7 +306,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   font-size: 0.9rem;
   color: rgba(248,247,244,0.65);
   border-radius: 8px;
-  transition: all var(--transition);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .mobile-sub-link:hover { color: #fff; background: rgba(255,255,255,0.06); }
 
@@ -502,7 +502,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   background: rgba(255,255,255,0.06);
   border-radius: var(--radius-card);
   border: 1px solid rgba(255,255,255,0.1);
-  transition: all var(--transition);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .tech-item:hover {
   border-color: var(--green-light);
@@ -684,7 +684,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   border-radius: var(--radius-card);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.1);
-  transition: all var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
 }
@@ -812,7 +812,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   border: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
   text-align: left;
-  transition: all var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: default;
 }
 .industry-item::before {
@@ -875,7 +875,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   border-radius: var(--radius-card);
   padding: 36px 28px;
   overflow: hidden;
-  transition: all var(--transition);
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 .service-card::before {
   content: '';
@@ -1019,7 +1019,7 @@ p  { font-size: 1rem; color: rgba(255,255,255,0.75) !important; }
   align-items: center;
   justify-content: center;
   color: rgba(248,247,244,0.6);
-  transition: all var(--transition);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .footer-social-link:hover { background: rgba(42,138,110,0.3); color: #fff; border-color: rgba(42,138,110,0.5); }
 .footer-heading { font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,247,244,0.4); margin-bottom: 20px; }
