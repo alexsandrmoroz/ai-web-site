@@ -1,46 +1,31 @@
-<section class="how-it-works" id="process">
+<section class="booking-process">
   <style>
-    .how-it-works {
-      background: #0f3b2f;
-      padding: 96px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .how-it-works::after {
-      content: '';
-      position: absolute;
-      top: -120px;
-      right: -120px;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(42,138,110,0.15) 0%, transparent 70%);
-      pointer-events: none;
+    .booking-process {
+      background: #f9fafb;
+      padding: 80px 24px;
     }
     .process-inner {
       max-width: 1200px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
     }
-    .process-header {
+    .process-heading {
       text-align: center;
-      margin-bottom: 72px;
+      margin-bottom: 64px;
     }
-    .process-title {
-      font-size: clamp(2rem, 4vw, 2.8rem);
+    .process-heading h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       font-weight: 700;
-      color: #f8f7f4;
-      margin: 0 0 16px;
-      font-family: 'Open Sans', sans-serif;
-      line-height: 1.15;
+      color: #1a1a1a;
+      margin: 0 0 12px;
+      font-family: 'Inter', 'Open Sans', sans-serif;
     }
-    .process-subtitle {
-      font-size: 1.1rem;
-      color: rgba(248,247,244,0.7);
-      max-width: 560px;
+    .process-heading p {
+      font-size: 1.05rem;
+      color: #6b7280;
+      max-width: 500px;
       margin: 0 auto;
       line-height: 1.7;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Inter', 'Open Sans', sans-serif;
     }
     .process-steps {
       display: grid;
@@ -51,144 +36,148 @@
     .process-steps::before {
       content: '';
       position: absolute;
-      top: 40px;
-      left: calc(12.5% + 24px);
-      right: calc(12.5% + 24px);
+      top: 36px;
+      left: calc(12.5% + 16px);
+      right: calc(12.5% + 16px);
       height: 2px;
-      background: linear-gradient(90deg, #2a8a6e, rgba(42,138,110,0.3));
+      background: linear-gradient(90deg, #2563eb 0%, #93c5fd 100%);
       z-index: 0;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 860px) {
       .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .process-steps::before { display: none; }
     }
-    @media (max-width: 520px) {
-      .process-steps { grid-template-columns: 1fr; gap: 24px; }
-      .how-it-works { padding: 64px 20px; }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; gap: 20px; }
+      .booking-process { padding: 56px 20px; }
     }
     .process-step {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
+      padding: 0 16px;
       position: relative;
       z-index: 1;
     }
-    .step-number-wrap {
-      width: 80px;
-      height: 80px;
+    .step-circle {
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      background: #163d35;
-      border: 2px solid #2a8a6e;
+      background: #fff;
+      border: 2px solid #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
-      position: relative;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-    .process-step:hover .step-number-wrap {
-      background: #2a8a6e;
-      box-shadow: 0 0 0 8px rgba(42,138,110,0.15);
-    }
-    .step-number {
       font-size: 1.6rem;
-      font-weight: 800;
-      color: #2a8a6e;
-      font-family: 'Open Sans', sans-serif;
-      line-height: 1;
-      transition: color 0.3s ease;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.12);
     }
-    .process-step:hover .step-number { color: #f8f7f4; }
-    .step-icon {
-      font-size: 1.5rem;
+    .process-step:hover .step-circle {
+      background: #2563eb;
+      box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+    }
+    .step-num {
       position: absolute;
-      bottom: -8px;
-      right: -8px;
-      background: #1a5c4a;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background: #2563eb;
+      color: #fff;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      font-size: 0.7rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      border: 2px solid #163d35;
+      font-family: 'Inter', 'Open Sans', sans-serif;
     }
     .step-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #f8f7f4;
-      font-family: 'Open Sans', sans-serif;
-      margin-bottom: 12px;
+      color: #1a1a1a;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+      margin-bottom: 10px;
     }
     .step-desc {
-      font-size: 0.9rem;
-      color: rgba(248,247,244,0.6);
-      font-family: 'Open Sans', sans-serif;
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-family: 'Inter', 'Open Sans', sans-serif;
       line-height: 1.65;
     }
     .process-cta {
       text-align: center;
-      margin-top: 64px;
+      margin-top: 56px;
     }
-    .process-cta p {
-      font-size: 1rem;
-      color: rgba(248,247,244,0.6);
-      font-family: 'Open Sans', sans-serif;
-      margin: 0 0 24px;
+    .process-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+      text-decoration: none;
+      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .process-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+      transform: translateY(-2px);
     }
   </style>
 
   <div class="process-inner">
-    <div class="process-header">
-      <div class="section-label section-label-light fade-up">How It Works</div>
-      <h2 class="process-title fade-up delay-1">Your Path to a Tech Career</h2>
-      <p class="process-subtitle fade-up delay-2">Four straightforward steps from where you are now to where you want to be.</p>
+    <div class="process-heading">
+      <h2>Як замовити тур</h2>
+      <p>Чотири прості кроки — і ваша мрія про відпустку стане реальністю.</p>
     </div>
 
     <div class="process-steps">
-      <div class="process-step fade-up delay-1">
-        <div class="step-number-wrap">
-          <span class="step-number">01</span>
-          <span class="step-icon">&#128196;</span>
+      <div class="process-step">
+        <div class="step-circle">
+          🔍
+          <span class="step-num">1</span>
         </div>
-        <div class="step-title">Apply Online</div>
-        <p class="step-desc">Fill out a short application. No prior experience or degree required — we assess motivation and potential.</p>
+        <div class="step-title">Оберіть тур</div>
+        <p class="step-desc">Переглядайте тисячі пропозицій або скористайтесь пошуком за країною, датою та бюджетом.</p>
       </div>
 
-      <div class="process-step fade-up delay-2">
-        <div class="step-number-wrap">
-          <span class="step-number">02</span>
-          <span class="step-icon">&#128172;</span>
+      <div class="process-step">
+        <div class="step-circle">
+          💬
+          <span class="step-num">2</span>
         </div>
-        <div class="step-title">Get Matched</div>
-        <p class="step-desc">Our team reviews your goals and matches you with the right program track and a dedicated mentor.</p>
+        <div class="step-title">Зверніться до менеджера</div>
+        <p class="step-desc">Наш менеджер зв'яжеться з вами, уточнить деталі та відповість на всі запитання.</p>
       </div>
 
-      <div class="process-step fade-up delay-3">
-        <div class="step-number-wrap">
-          <span class="step-number">03</span>
-          <span class="step-icon">&#128187;</span>
+      <div class="process-step">
+        <div class="step-circle">
+          📄
+          <span class="step-num">3</span>
         </div>
-        <div class="step-title">Learn &amp; Build</div>
-        <p class="step-desc">Train with industry-grade curriculum, work on real projects, and get hands-on guidance every step of the way.</p>
+        <div class="step-title">Оформіть документи</div>
+        <p class="step-desc">Підписуємо договір, оформлюємо страховку та всі необхідні документи для поїздки.</p>
       </div>
 
-      <div class="process-step fade-up delay-4">
-        <div class="step-number-wrap">
-          <span class="step-number">04</span>
-          <span class="step-icon">&#127881;</span>
+      <div class="process-step">
+        <div class="step-circle">
+          🌴
+          <span class="step-num">4</span>
         </div>
-        <div class="step-title">Land the Role</div>
-        <p class="step-desc">Leverage our job placement support, alumni network, and partner companies to land your first tech job.</p>
+        <div class="step-title">Вирушайте у подорож</div>
+        <p class="step-desc">Насолоджуйтесь відпочинком — ми на зв'язку 24/7 якщо знадобиться допомога.</p>
       </div>
     </div>
 
-    <div class="process-cta fade-up delay-5">
-      <p>Ready to take the first step?</p>
-      <a href="#contact" class="btn btn-primary">Apply Now — It's Free</a>
+    <div class="process-cta">
+      <a href="#contact" class="process-btn">Підібрати тур ✈️</a>
     </div>
   </div>
 </section>
