@@ -50,20 +50,49 @@
   }
 
   /* ── Kommo CRM ────────────────────────────────────────── */
-  const KOMMO_FUNCTION_URL = 'https://us-central1-ai-forms-25ad9.cloudfunctions.net/submitLead';
+  const KOMMO_API   = 'https://api-c.kommo.com/api/v4';
+  const KOMMO_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjA5OWZhYmE3NWM3ZjI3NDEzNTdlZTRkMDk2OWMzMWQyNDViYzM1Njc3NTBiOWRlMjQwOTczZDA3MTY5ZDZiNDBhYTg1NWRlNDVhZGMxNDMzIn0.eyJhdWQiOiJkMTU5YzA5OC0xMjVjLTQxNTAtOTdiZC0xYzg1YjU3MjVmYjQiLCJqdGkiOiIwOTlmYWJhNzVjN2YyNzQxMzU3ZWU0ZDA5NjljMzFkMjQ1YmMzNTY3NTUwYjlkZTI0MDk3M2QwNzE2OWQ2YjQwYWE4NTVkZTQ1YWRjMTQzMyIsImlhdCI6MTc3Mzg2MzkzOSwibmJmIjoxNzczODYzOTM5LCJleHAiOjE3NzUwMDE2MDAsInN1YiI6IjE0OTc0Mzk5IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjM2MjIyNjkxLCJiYXNlX2RvbWFpbiI6ImtvbW1vLmNvbSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiMzdkNTliYmMtYjU2Ni00YmFjLThjMzItNzQ5MjBmM2IyNDY5IiwiYXBpX2RvbWFpbiI6ImFwaS1jLmtvbW1vLmNvbSJ9.PqCcyAajOr8VwPP6ZtKwIxdTVcvzSgmmDFzqgR5gAyiH0kP3PopKxrQV8bmS2_jnp6QlPJ9F1UGolhB4xNxJynTvSXEtyLk7D1CIsKYPCMVox9nYyoVYZg0Wyw7WkYxDgU37-FgN1YxbAvylZicg9Wa-wFqiPluL5w4iTcMy9yQQQ-oH-EmJ4a1zjI3a8HKCbXqg7uvqUpdN0KZo90auaN-JDuVvuljQnvW0cV_7SPOSdv1T0-7Xyq_lWezc3ynfwBT02BixZF_ZF1U4i4NPvNE_lyBbRkfMQA2HcZb8pIbQw3Py77QxY2PSNi1IjzcFm-DDY39pwk1AslXzVVWzgQ';
 
-  async function sendToKommo(data) {
+  async function sendToKommo({ firstName, lastName, email, phone, idea }) {
+    const headers = {
+      Authorization: `Bearer ${KOMMO_TOKEN}`,
+      'Content-Type': 'application/json',
+    };
+
     try {
-      const res = await fetch(KOMMO_FUNCTION_URL, {
+      /* 1. Create contact */
+      const contactRes = await fetch(`${KOMMO_API}/contacts`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers,
+        body: JSON.stringify([{
+          first_name: firstName,
+          last_name:  lastName,
+          custom_fields_values: [
+            email && { field_code: 'EMAIL', values: [{ value: email, enum_code: 'WORK' }] },
+            phone && { field_code: 'PHONE', values: [{ value: phone, enum_code: 'WORK' }] },
+          ].filter(Boolean),
+        }]),
       });
-      const json = await res.json();
-      if (!res.ok) console.warn('Kommo CRM error:', json);
-      else console.log('Kommo lead created:', json.leadId);
+      const contactData = await contactRes.json();
+      const contactId   = contactData?._embedded?.contacts?.[0]?.id;
+
+      /* 2. Create lead */
+      const leadRes = await fetch(`${KOMMO_API}/leads`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify([{
+          name: `${firstName} ${lastName}`.trim() || email,
+          _embedded: { contacts: contactId ? [{ id: contactId }] : [] },
+          custom_fields_values: idea ? [
+            { field_code: 'DESCRIPTION', values: [{ value: idea }] },
+          ] : [],
+        }]),
+      });
+      const leadData = await leadRes.json();
+      const leadId   = leadData?._embedded?.leads?.[0]?.id;
+      console.log('Kommo lead created:', leadId);
     } catch (err) {
-      console.warn('Kommo CRM unreachable:', err);
+      console.warn('Kommo CRM error:', err);
     }
   }
 
