@@ -49,6 +49,24 @@
     document.head.appendChild(link);
   }
 
+  /* ── Kommo CRM ────────────────────────────────────────── */
+  const KOMMO_FUNCTION_URL = 'https://us-central1-ai-forms-25ad9.cloudfunctions.net/submitLead';
+
+  async function sendToKommo(data) {
+    try {
+      const res = await fetch(KOMMO_FUNCTION_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok) console.warn('Kommo CRM error:', json);
+      else console.log('Kommo lead created:', json.leadId);
+    } catch (err) {
+      console.warn('Kommo CRM unreachable:', err);
+    }
+  }
+
   /* ── Firebase Config ──────────────────────────────────── */
   const firebaseConfig = {
     apiKey: "AIzaSyCZV7nDI1ej4xQgTwoM9shKweXt0-6pqQs",
@@ -176,7 +194,16 @@
         };
 
         try {
-          await addDoc(collection(db, COLLECTION_NAME), data);
+          await Promise.all([
+            addDoc(collection(db, COLLECTION_NAME), data),
+            sendToKommo({
+              firstName: data.firstName,
+              lastName:  data.lastName,
+              email:     data.email,
+              phone:     data.phone,
+              idea:      data.idea,
+            }),
+          ]);
           if (msgEl) {
             msgEl.textContent = 'Thank you! We\'ll be in touch soon.';
             msgEl.className = 'form-message success';
