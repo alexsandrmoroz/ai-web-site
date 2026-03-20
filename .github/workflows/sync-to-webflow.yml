@@ -16,18 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Read embed files
-        id: read
-        run: |
-          HEAD_CODE=$(cat embed-snippets/webflow-head.html)
-          FOOTER_CODE=$(cat embed-snippets/webflow-footer-script.html)
-          echo "head_code<<EOF_HEAD" >> $GITHUB_OUTPUT
-          echo "$HEAD_CODE" >> $GITHUB_OUTPUT
-          echo "EOF_HEAD" >> $GITHUB_OUTPUT
-          echo "footer_code<<EOF_FOOTER" >> $GITHUB_OUTPUT
-          echo "$FOOTER_CODE" >> $GITHUB_OUTPUT
-          echo "EOF_FOOTER" >> $GITHUB_OUTPUT
-
       - name: Update Webflow Site Custom Code
         env:
           WEBFLOW_API_TOKEN: ${{ secrets.WEBFLOW_API_TOKEN }}
@@ -52,11 +40,11 @@ jobs:
           cat /tmp/wf_response.json | jq . || cat /tmp/wf_response.json
 
           if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
-            echo "❌ Webflow API call failed with status $HTTP_STATUS"
+            echo "Webflow API call failed with status $HTTP_STATUS"
             exit 1
           fi
 
-          echo "✅ Webflow custom code updated successfully"
+          echo "Webflow custom code updated successfully"
 
       - name: Publish Webflow Site
         env:
@@ -74,7 +62,7 @@ jobs:
           cat /tmp/wf_publish.json | jq . || cat /tmp/wf_publish.json
 
           if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
-            echo "⚠️  Publish failed (HTTP $HTTP_STATUS) — custom code was still updated"
+            echo "Publish failed (HTTP $HTTP_STATUS)"
           else
-            echo "✅ Site published successfully"
+            echo "Site published successfully"
           fi
