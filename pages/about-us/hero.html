@@ -1,0 +1,128 @@
+<section class="about-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="about-hero-inner">
+    <div class="about-hero-content fade-up">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Non-Profit Tech Education
+      </div>
+
+      <h1 class="about-hero-title">
+        Our Story,<br>
+        Our <span>Mission</span>
+      </h1>
+
+      <p class="about-hero-subtitle">
+        Founded in 2021, CodeBridge Foundation has been on a mission to tear down the barriers that keep talented people out of tech. We believe opportunity should be earned, not inherited.
+      </p>
+
+      <div class="about-hero-actions">
+        <a href="#about-story" class="btn btn-primary">Our Story</a>
+        <a href="#about-team" class="btn btn-ghost">Meet the Team</a>
+      </div>
+    </div>
+
+    <div class="about-hero-stats fade-up delay-2">
+      <div class="about-stat-card">
+        <div class="about-stat-number" data-count="500">0</div>
+        <div class="about-stat-label">Students Mentored</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="about-stat-number" data-count="48">0</div>
+        <div class="about-stat-label">Industry Partners</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="about-stat-number" data-count="92">0</div>
+        <div class="about-stat-label">% Job Placement</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="about-stat-number" data-count="4">0</div>
+        <div class="about-stat-label">Years Running</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.about-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a2a21 0%, #163d35 50%, #0f3b2f 100%);
+  padding: 120px 24px 80px;
+}
+.about-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.about-hero-title {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.about-hero-title span {
+  background: linear-gradient(135deg, #2a8a6e, #4ecba8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.about-hero-subtitle {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+.about-hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.about-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.about-stat-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.about-stat-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.09);
+}
+.about-stat-number {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #4ecba8;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.about-stat-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 768px) {
+  .about-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
