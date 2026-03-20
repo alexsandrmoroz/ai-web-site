@@ -1,0 +1,183 @@
+<section class="booking-process">
+  <style>
+    .booking-process {
+      background: #f9fafb;
+      padding: 80px 24px;
+    }
+    .process-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .process-heading {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .process-heading h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 12px;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+    }
+    .process-heading p {
+      font-size: 1.05rem;
+      color: #6b7280;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 16px);
+      right: calc(12.5% + 16px);
+      height: 2px;
+      background: linear-gradient(90deg, #2563eb 0%, #93c5fd 100%);
+      z-index: 0;
+    }
+    @media (max-width: 860px) {
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; gap: 20px; }
+      .booking-process { padding: 56px 20px; }
+    }
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.6rem;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+    }
+    .process-step:hover .step-circle {
+      background: #2563eb;
+      box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+    }
+    .step-num {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+      line-height: 1.65;
+    }
+    .process-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+    .process-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Inter', 'Open Sans', sans-serif;
+      text-decoration: none;
+      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .process-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+      transform: translateY(-2px);
+    }
+  </style>
+
+  <div class="process-inner">
+    <div class="process-heading">
+      <h2>Як замовити тур</h2>
+      <p>Чотири прості кроки — і ваша мрія про відпустку стане реальністю.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-circle">
+          🔍
+          <span class="step-num">1</span>
+        </div>
+        <div class="step-title">Оберіть тур</div>
+        <p class="step-desc">Переглядайте тисячі пропозицій або скористайтесь пошуком за країною, датою та бюджетом.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-circle">
+          💬
+          <span class="step-num">2</span>
+        </div>
+        <div class="step-title">Зверніться до менеджера</div>
+        <p class="step-desc">Наш менеджер зв'яжеться з вами, уточнить деталі та відповість на всі запитання.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-circle">
+          📄
+          <span class="step-num">3</span>
+        </div>
+        <div class="step-title">Оформіть документи</div>
+        <p class="step-desc">Підписуємо договір, оформлюємо страховку та всі необхідні документи для поїздки.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-circle">
+          🌴
+          <span class="step-num">4</span>
+        </div>
+        <div class="step-title">Вирушайте у подорож</div>
+        <p class="step-desc">Насолоджуйтесь відпочинком — ми на зв'язку 24/7 якщо знадобиться допомога.</p>
+      </div>
+    </div>
+
+    <div class="process-cta">
+      <a href="#contact" class="process-btn">Підібрати тур ✈️</a>
+    </div>
+  </div>
+</section>
