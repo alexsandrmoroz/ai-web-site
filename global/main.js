@@ -5,22 +5,28 @@
 (function () {
   'use strict';
 
-  /* ── Page Embed Loader ────────────────────────────────── */
+  /* ── Page Loader ──────────────────────────────────────── */
   const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main';
 
-  async function loadPageEmbed() {
-    const embed = document.querySelector('[data-page]');
-    if (!embed) { init(); return; }
+  function getSlug() {
+    const path = window.location.pathname.replace(/\/$/, '');
+    if (!path || path === '/') return 'home';
+    return path.split('/').filter(Boolean).pop();
+  }
 
-    const slug = embed.getAttribute('data-page');
+  async function loadPage() {
+    const slug = getSlug();
     const url  = BASE + '/pages/' + slug + '.html';
 
     try {
       const res = await fetch(url);
-      if (!res.ok) { console.warn('Could not load page:', url); init(); return; }
-      embed.innerHTML = await res.text();
+      if (!res.ok) { console.warn('No page file for:', slug); init(); return; }
+      const container = document.createElement('div');
+      container.id = 'cb-app';
+      container.innerHTML = await res.text();
+      document.body.appendChild(container);
     } catch (e) {
-      console.warn('Failed to fetch page:', url, e);
+      console.warn('Failed to load page:', url, e);
     }
     init();
   }
@@ -320,8 +326,8 @@
   /* ── Entry Point ──────────────────────────────────────── */
   loadCSS();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadPageEmbed);
+    document.addEventListener('DOMContentLoaded', loadPage);
   } else {
-    loadPageEmbed();
+    loadPage();
   }
 })();
