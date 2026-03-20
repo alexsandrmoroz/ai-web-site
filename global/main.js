@@ -5,56 +5,22 @@
 (function () {
   'use strict';
 
-  /* ── Section Loader ───────────────────────────────────── */
+  /* ── Page Embed Loader ────────────────────────────────── */
   const BASE = 'https://alexsandrmoroz.github.io/ai-web-site';
 
-  const PAGE_SECTIONS = {
-    home: [
-      BASE + '/global/nav.html',
-      BASE + '/pages/home/hero.html',
-      BASE + '/pages/home/mission.html',
-      BASE + '/pages/home/services.html',
-      BASE + '/pages/home/industries.html',
-      BASE + '/pages/home/techstack.html',
-      BASE + '/pages/home/team.html',
-      BASE + '/pages/home/volunteer.html',
-      BASE + '/pages/home/blog.html',
-      BASE + '/pages/home/contact.html',
-      BASE + '/pages/home/image.html',
-      BASE + '/global/footer.html',
-    ],
-    'about-us': [
-      BASE + '/global/nav.html',
-      BASE + '/pages/about-us/hero.html',
-      BASE + '/pages/about-us/story.html',
-      BASE + '/pages/about-us/values.html',
-      BASE + '/pages/about-us/team.html',
-      BASE + '/pages/about-us/cta.html',
-      BASE + '/global/footer.html',
-    ],
-  };
+  async function loadPageEmbed() {
+    const embed = document.querySelector('[data-page]');
+    if (!embed) { init(); return; }
 
-  function getPageKey() {
-    const path = window.location.pathname.replace(/\/$/, '');
-    if (path === '' || path === '/') return 'home';
-    const slug = path.split('/').filter(Boolean).pop();
-    return PAGE_SECTIONS[slug] ? slug : 'home';
-  }
+    const slug = embed.getAttribute('data-page');
+    const url  = BASE + '/pages/' + slug + '.html';
 
-  async function loadSections() {
-    const sections = PAGE_SECTIONS[getPageKey()] || PAGE_SECTIONS.home;
-    const container = document.getElementById('cb-app') || document.body;
-    for (const url of sections) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) { console.warn('Could not load:', url); continue; }
-        const html = await res.text();
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        container.appendChild(wrapper);
-      } catch (e) {
-        console.warn('Failed to fetch:', url, e);
-      }
+    try {
+      const res = await fetch(url);
+      if (!res.ok) { console.warn('Could not load page:', url); init(); return; }
+      embed.innerHTML = await res.text();
+    } catch (e) {
+      console.warn('Failed to fetch page:', url, e);
     }
     init();
   }
@@ -354,8 +320,8 @@
   /* ── Entry Point ──────────────────────────────────────── */
   loadCSS();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadSections);
+    document.addEventListener('DOMContentLoaded', loadPageEmbed);
   } else {
-    loadSections();
+    loadPageEmbed();
   }
 })();
