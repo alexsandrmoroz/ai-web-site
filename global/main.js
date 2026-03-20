@@ -7,24 +7,44 @@
 
   /* ── Section Loader ───────────────────────────────────── */
   const BASE = 'https://alexsandrmoroz.github.io/ai-web-site';
-  const SECTIONS = [
-    BASE + '/global/nav.html',
-    BASE + '/pages/home/hero.html',
-    BASE + '/pages/home/mission.html',
-    BASE + '/pages/home/services.html',
-    BASE + '/pages/home/industries.html',
-    BASE + '/pages/home/techstack.html',
-    BASE + '/pages/home/team.html',
-    BASE + '/pages/home/volunteer.html',
-    BASE + '/pages/home/blog.html',
-    BASE + '/pages/home/contact.html',
-    BASE + '/pages/home/image.html',
-    BASE + '/global/footer.html',
-  ];
+
+  const PAGE_SECTIONS = {
+    home: [
+      BASE + '/global/nav.html',
+      BASE + '/pages/home/hero.html',
+      BASE + '/pages/home/mission.html',
+      BASE + '/pages/home/services.html',
+      BASE + '/pages/home/industries.html',
+      BASE + '/pages/home/techstack.html',
+      BASE + '/pages/home/team.html',
+      BASE + '/pages/home/volunteer.html',
+      BASE + '/pages/home/blog.html',
+      BASE + '/pages/home/contact.html',
+      BASE + '/pages/home/image.html',
+      BASE + '/global/footer.html',
+    ],
+    'about-us': [
+      BASE + '/global/nav.html',
+      BASE + '/pages/about-us/hero.html',
+      BASE + '/pages/about-us/story.html',
+      BASE + '/pages/about-us/values.html',
+      BASE + '/pages/about-us/team.html',
+      BASE + '/pages/about-us/cta.html',
+      BASE + '/global/footer.html',
+    ],
+  };
+
+  function getPageKey() {
+    const path = window.location.pathname.replace(/\/$/, '');
+    if (path === '' || path === '/') return 'home';
+    const slug = path.split('/').filter(Boolean).pop();
+    return PAGE_SECTIONS[slug] ? slug : 'home';
+  }
 
   async function loadSections() {
+    const sections = PAGE_SECTIONS[getPageKey()] || PAGE_SECTIONS.home;
     const container = document.getElementById('cb-app') || document.body;
-    for (const url of SECTIONS) {
+    for (const url of sections) {
       try {
         const res = await fetch(url);
         if (!res.ok) { console.warn('Could not load:', url); continue; }
@@ -290,7 +310,7 @@
 
   /* ── Deploy Badge ─────────────────────────────────────── */
   function initDeployBadge() {
-    const DEPLOY_TIME = new Date('2026-03-16T20:50:00Z');
+    const DEPLOY_TIME = new Date('2026-03-20T10:30:00Z');
     const label = DEPLOY_TIME.toLocaleString('uk-UA', {
       timeZone: 'Europe/Kyiv',
       day:    '2-digit',
