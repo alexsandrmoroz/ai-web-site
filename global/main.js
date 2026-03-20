@@ -6,7 +6,7 @@
   'use strict';
 
   /* ── Page Embed Loader ────────────────────────────────── */
-  const BASE = 'https://alexsandrmoroz.github.io/ai-web-site';
+  const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main';
 
   async function loadPageEmbed() {
     const embed = document.querySelector('[data-page]');

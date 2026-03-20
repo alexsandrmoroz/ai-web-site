@@ -1,0 +1,28 @@
+name: Purge jsDelivr Cache
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Purge global assets
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.js"
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.css"
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/nav.html"
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/footer.html"
+
+      - name: Purge page files
+        run: |
+          for f in pages/*.html; do
+            slug=$(basename "$f")
+            echo "Purging $slug..."
+            curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/pages/$slug"
+          done
