@@ -8,26 +8,40 @@
   /* ── Page Loader ──────────────────────────────────────── */
   const BASE = 'https://cdn.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main';
 
-  function getSlug() {
-    const path = window.location.pathname.replace(/\/$/, '');
-    if (!path || path === '/') return 'home';
-    return path.split('/').filter(Boolean).pop();
+  function getPagePath() {
+    const path = window.location.pathname.replace(/^\/|\/$/g, '');
+    return path || 'home';
+  }
+
+  async function fetchHTML(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + url);
+    return res.text();
   }
 
   async function loadPage() {
-    const slug = getSlug();
-    const url  = BASE + '/pages/' + slug + '.html';
+    const pagePath = getPagePath();
+    const container = document.createElement('div');
+    container.id = 'cb-app';
 
-    try {
-      const res = await fetch(url);
-      if (!res.ok) { console.warn('No page file for:', slug); init(); return; }
-      const container = document.createElement('div');
-      container.id = 'cb-app';
-      container.innerHTML = await res.text();
-      document.body.appendChild(container);
-    } catch (e) {
-      console.warn('Failed to load page:', url, e);
+    const parts = [
+      BASE + '/global/nav.html',
+      BASE + '/pages/' + pagePath + '/index.html',
+      BASE + '/global/footer.html',
+    ];
+
+    for (const url of parts) {
+      try {
+        const html = await fetchHTML(url);
+        const el = document.createElement('div');
+        el.innerHTML = html;
+        container.appendChild(el);
+      } catch (e) {
+        console.warn('Could not load:', e.message);
+      }
     }
+
+    document.body.appendChild(container);
     init();
   }
 
