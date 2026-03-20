@@ -1,4 +1,4 @@
-name: Auto-merge claude/* to main
+name: Auto-merge claude/* to main and purge CDN cache
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'claude/**'
 
 jobs:
-  merge:
+  merge-and-purge:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,3 +24,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git merge --ff-only origin/${{ github.ref_name }} || git merge -X theirs origin/${{ github.ref_name }}
           git push origin main
+
+      - name: Purge jsDelivr cache
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.css"
+          curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/main.js"
