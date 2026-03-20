@@ -19,10 +19,10 @@ jobs:
           curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/nav.html"
           curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/global/footer.html"
 
-      - name: Purge page files
+      - name: Purge page index files
         run: |
-          for f in pages/*.html; do
-            slug=$(basename "$f")
-            echo "Purging $slug..."
-            curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/pages/$slug"
+          find pages -name "index.html" | while read f; do
+            path="${f}"
+            echo "Purging $path..."
+            curl -s "https://purge.jsdelivr.net/gh/alexsandrmoroz/ai-web-site@main/$path"
           done
