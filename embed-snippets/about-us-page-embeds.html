@@ -1,11 +1,11 @@
-<!-- Velvet Tour — HOME BODY (вставити в Webflow: Home page → Embed компонент у body) -->
+<!-- Velvet Tour — ABOUT-US BODY (вставити в Webflow: Про нас page → Embed компонент у body) -->
 
-<div id="vt-home"></div>
+<div id="vt-about"></div>
 <script>
-fetch('https://alexsandrmoroz.github.io/ai-web-site/pages/home/index.html')
+fetch('https://alexsandrmoroz.github.io/ai-web-site/pages/about-us/index.html')
   .then(function(r){ return r.text(); })
   .then(function(html){
-    document.getElementById('vt-home').outerHTML = html;
+    document.getElementById('vt-about').outerHTML = html;
     var io = new IntersectionObserver(function(e){
       e.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('visible'); io.unobserve(x.target); } });
     }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
