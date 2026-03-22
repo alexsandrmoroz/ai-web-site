@@ -243,12 +243,28 @@
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 991px) {
-  .au-hero-inner, .au-story-grid { grid-template-columns: 1fr; gap: 2.5em; }
-  .au-hero-img { display: none; }
-  .au-stats-grid { grid-template-columns: repeat(2,1fr); }
-  .au-why-grid { grid-template-columns: repeat(2,1fr); }
+  .au-hero        { padding: 3em 0; }
+  .au-hero-inner  { grid-template-columns: 1fr; gap: 2em; }
+  .au-hero-img    { display: none; }
+
+  .au-stats       { padding: 2em 0; }
+  .au-stats-grid  { grid-template-columns: repeat(2,1fr); gap: 1.5em; }
+
+  .au-story       { padding: 3em 0; }
+  .au-story-grid  { grid-template-columns: 1fr; gap: 2em; }
+
+  .au-why         { padding: 3em 0; }
+  .au-why-grid    { grid-template-columns: repeat(2,1fr); gap: 1em; }
+
+  .au-team        { padding: 3em 0; }
+  .au-team-grid   { grid-template-columns: repeat(2,1fr); gap: 1.25em; }
+
+  .au-cta         { padding: 3em 0; }
 }
-@media (max-width: 479px) {
-  .au-why-grid, .au-team-grid { grid-template-columns: 1fr; }
+@media (max-width: 599px) {
+  .au-stats-grid  { grid-template-columns: repeat(2,1fr); }
+  .au-why-grid    { grid-template-columns: 1fr; }
+  .au-team-grid   { grid-template-columns: 1fr; }
+  .au-cta-actions { flex-direction: column; align-items: center; }
 }
 </style>
